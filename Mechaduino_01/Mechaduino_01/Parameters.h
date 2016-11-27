@@ -17,8 +17,7 @@ extern volatile float vKp;
 extern volatile float vKi;
 extern volatile float vKd;
 
-extern const PROGMEM float lookup[];
-
+extern const float lookup[];
 
 extern const int spr; //  200 steps per revolution
 extern const float aps; // angle per step
@@ -49,13 +48,9 @@ extern const int chipSelectPin;
 extern const int step_pin;
 extern const int dir_pin;
 
-
-
-
-extern const PROGMEM float force_lookup[];
+extern const float force_lookup[];
 
 extern  int sin_1[3600];
-
 
 #endif
 
