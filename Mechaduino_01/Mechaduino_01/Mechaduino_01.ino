@@ -42,6 +42,8 @@
 #include "Parameters.h"
 #include "State.h"
 #include "analogFastWrite.h"
+#include "SPI.h"
+#include "Wire.h"
 
 //////////////////////////////////////
 /////////////////SETUP////////////////
