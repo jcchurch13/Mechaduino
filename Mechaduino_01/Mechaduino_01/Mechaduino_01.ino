@@ -85,7 +85,7 @@ void setup()        // This code runs once at startup
 void loop()                 // main loop
 {
 
-  serialCheck();              //must have this execute in loop for serial commands to function
+  serialCheck2();              //must have this execute in loop for serial commands to function
 
   //r=0.1125*step_count;      //Don't use this anymore. Step interrupts enabled above by "configureStepDir()", adjust step size in parameters.cpp
 

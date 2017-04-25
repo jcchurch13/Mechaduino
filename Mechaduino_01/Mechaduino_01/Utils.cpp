@@ -413,6 +413,84 @@ void serialCheck() {        //Monitors serial for commands.  Must be called in r
 
 }
 
+unsigned int input_buffer_index = 0;
+char input_buffer[INPUT_BUFFER_BYTES];
+
+void processSerialCommand( void ) {
+   char cmd = input_buffer[0];
+   switch(cmd) {
+      case 'p':                      // print angle
+         print_angle();
+         break;
+      case 'y':
+         enableTCInterrupts();       // enable closed loop
+         break;
+      case 'n':
+         disableTCInterrupts();      // disable closed loop
+         break;
+      case 'x':
+         mode = 'x';                 // position loop
+         break;
+      case 'r':                      // new setpoint
+         r = atof(&(input_buffer[1]));
+         break;
+      case 'g':                      // new gai
+         {
+            char subcmd = input_buffer[1];
+            double v = atof(&(input_buffer[2]));
+
+            switch (subcmd) {
+               case 'p':
+                  pKp = v;
+                  break;
+               case 'i':
+                  pKi = v;
+                  break;
+               case 'd':
+                  pKd = v;
+                  break;
+               default:
+                  break;
+            }
+         }
+         break;
+      case 'z':
+         SerialUSB.println();
+         SerialUSB.print("p ----- pKp = ");
+         SerialUSB.println(pKp, DEC);
+         SerialUSB.print("i ----- pKi = ");
+         SerialUSB.println(pKi, DEC);
+         SerialUSB.print("d ----- pKd = ");
+         SerialUSB.println(pKd, DEC);
+         SerialUSB.print("l----- LPF = ");
+         SerialUSB.println(pLPF, DEC);
+         break;
+      default:
+         break;
+   }
+}
+
+void serialCheck2( void ) {
+   /* Check if there is a byte available */
+   if (SerialUSB.available()) {
+      char in = (char)SerialUSB.read();
+      switch (in) {
+         case '\n':
+            processSerialCommand();
+            input_buffer_index = 0;
+            break;
+         default:
+            if (input_buffer_index >= INPUT_BUFFER_BYTES) {
+               input_buffer_index = 0;
+            }
+            else {
+               input_buffer[input_buffer_index] = in;
+               input_buffer_index++;
+            }
+            break;
+      }
+   }
+}
 
 void parameterQuery() {         //print current parameters in a format that can be copied directly in to Parameters.cpp
   SerialUSB.println(' ');

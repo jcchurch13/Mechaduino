@@ -3,6 +3,7 @@
 #ifndef __UTILS_H__
 #define __UTIL_H__
 
+#define INPUT_BUFFER_BYTES (80)
 
 	void setupPins();                 // initializes pins
 	
@@ -23,6 +24,10 @@
 	void calibrate();	                //calibration routine
 		
 	void serialCheck();               //checks serial port for commands.  Must include this in loop() for serial interface to work
+
+	void serialCheck2();              //checks serial port for commands.  Must include this in loop() for serial interface to work
+
+	void processSerialCommand();      //once serial command is in, process it
 
 	void parameterQuery();            //Prints current parameters
 	
