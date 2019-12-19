@@ -87,7 +87,7 @@ void TC5_Handler() {                // gets called with FPID frequency
       else ledPin_LOW();                  //digitalWrite(ledPin, LOW);
 
 
-      output(-y, round(U));    // update phase currents
+      output(-y, U);    // update phase currents
     }
     
    // e_3 = e_2;    //copy current values to previous values for next control cycle
