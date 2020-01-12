@@ -43,6 +43,7 @@ extern const float rSense;
 extern volatile int uMAX;
 extern volatile int deadband; // Deadband for PID loop, in this range phase is adjusted between -PA and +PA
 
+
 extern const int sin_1[];
 
 //Defines for pins:
