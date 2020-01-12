@@ -44,6 +44,8 @@ const float iMAX = 1.0;             // Be careful adjusting this.  While the A49
 const float rSense = 0.150;
 volatile int uMAX = (255/3.3)*(iMAX*10*rSense);   // 255 for 8-bit pwm, 1023 for 10 bit, must also edit analogFastWrite
 
+volatile int deadband = uMAX / 16;
+
 // A sine lookup table is faster than using the built in sin() function
 // for motor commutation... shifted by 0 degrees (this appears to allow
 // for a less noisy cal routine) and multiplied by 1024

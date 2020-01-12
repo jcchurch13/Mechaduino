@@ -36,12 +36,12 @@ extern const float aps; // angle per step
 extern int cpr; //counts per rev
 extern const float stepangle;
 
-extern volatile float PA;  //
+extern volatile float PA;  // Phase advance
 
 extern const float iMAX;
 extern const float rSense;
 extern volatile int uMAX;
-
+extern volatile int deadband; // Deadband for PID loop, in this range phase is adjusted between -PA and +PA
 
 extern const int sin_1[];
 
