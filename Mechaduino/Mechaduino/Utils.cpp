@@ -693,10 +693,19 @@ void print_angle()                ///////////////////////////////////       PRIN
   SerialUSB.print(" , ");
 //  SerialUSB.print(stepNumber * aps, DEC);
 //  SerialUSB.print(" , ");
-  SerialUSB.print("Angle: ");
-  SerialUSB.print(read_angle(), 2);
-  SerialUSB.print(", raw encoder: ");
-  SerialUSB.print(readEncoder());
+  if (TC5->COUNT16.CTRLA.reg & TC_CTRLA_ENABLE)
+  {
+    // Print realtime data when in closed loop mode
+    SerialUSB.print("Angle: ");
+    SerialUSB.print(y_1, 2);
+  }
+  else
+  {
+    SerialUSB.print("Angle: ");
+    SerialUSB.print(read_angle(), 2);
+    SerialUSB.print(", raw encoder: ");
+    SerialUSB.print(readEncoder());
+  }
   SerialUSB.println();
 }
 
